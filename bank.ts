@@ -7,4 +7,10 @@ export class Bank {
 		}
 		return (this.balance -= amount)
 	}
+
+	account: string = 'Account Opened';
+
+	getBalance() {
+        return this.balance
+    }
 }
