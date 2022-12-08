@@ -7,8 +7,6 @@ const currencies = [
 export class Bank {
 	constructor(private balance: number) {}
 
-	account: string = 'Account Opened'
-
 	currencyConverter(amount: number, currencyOut: string) {
 		if (currencyOut === currencies[0].symbol) {
 			return amount
@@ -40,5 +38,10 @@ export class Bank {
 
 	getBalance() {
 		return this.balance
+	}
+
+	transfer(amount: number, to: Bank) {
+		this.withdraw(amount)
+		to.deposit(amount)
 	}
 }

@@ -73,3 +73,32 @@ describe('Get Balance', () => {
 		expect(new Bank(balance).getBalance()).toEqual(expected)
 	})
 })
+
+describe('Transfer', () => {
+	it.each([
+		[10, 20, 10, 10, 20],
+		[20, 20, 20, 0, 40],
+	])(
+		'should transfer %i from %i to %i and return %i',
+		(amount, fromBalance, toBalance, fromExpected, toExpected) => {
+			const from = new Bank(fromBalance)
+			const to = new Bank(toBalance)
+			from.transfer(amount, to)
+			expect(from.getBalance()).toEqual(fromExpected)
+			expect(to.getBalance()).toEqual(toExpected)
+		}
+	)
+
+	it.each([
+		[30, 20, 10],
+		[40, 20, 10],
+		[50, 20, 10],
+	])(
+		'should throw an error when transferring %i from %i to %i',
+		(amount, fromBalance, toBalance) => {
+			const from = new Bank(fromBalance)
+			const to = new Bank(toBalance)
+			expect(() => from.transfer(amount, to)).toThrowError('Insufficient funds')
+		}
+	)
+})
