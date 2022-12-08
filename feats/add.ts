@@ -5,3 +5,7 @@ export const addMoney = (amount: number, balance: number) => {
         throw new Error("Can't add a negative amount");
     }
 }
+
+export const openAccount = (account: string) => {
+    return account
+}
