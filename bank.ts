@@ -5,16 +5,17 @@ const currencies = [
 ]
 
 export class Bank {
+	constructor(private balance: number) {}
 
-	constructor(private balance: number) { }
-  
-	account: string = 'Account Opened';
+	account: string = 'Account Opened'
 
 	currencyConverter(amount: number, currencyOut: string) {
 		if (currencyOut === currencies[0].symbol) {
 			return amount
 		} else {
-			const currency = currencies.find((currency) => currency.symbol === currencyOut)
+			const currency = currencies.find(
+				(currency) => currency.symbol === currencyOut
+			)
 			if (!currency) {
 				throw new Error('Currency not found')
 			}
@@ -23,14 +24,14 @@ export class Bank {
 	}
 
 	deposit(amount: number) {
-        if (amount > 0) {
-            return (this.balance += amount)
-        } else {
-            throw new Error("Can't add a negative amount")
-        }
-  }
-	
-  withdraw(amount: number) {
+		if (amount > 0) {
+			return (this.balance += amount)
+		} else {
+			throw new Error("Can't add a negative amount")
+		}
+	}
+
+	withdraw(amount: number) {
 		if (amount > this.balance) {
 			throw new Error('Insufficient funds')
 		}
@@ -38,6 +39,6 @@ export class Bank {
 	}
 
 	getBalance() {
-      return this.balance
-  }
+		return this.balance
+	}
 }
